@@ -50,12 +50,25 @@ export default function Home() {
         </div>
       </main>
       <hr />
-      <section className="p-8 sm:p-16 bg-[url('/img/pinturaPasto.png')] bg-cover bg-center text-center">
-        <h2 className="text-3xl sm:text-4xl text-white mb-4">Crea tu portafolio artístico </h2>
-        <p className="text-xl sm:text-2xl text-black mb-6">Muestra tus obras y conecta con otros artistas.</p>
-        <button className="bg-[#d8c40c] text-white px-4 py-2 border-none rounded-2xl cursor-pointer font-semibold text-lg transition-colors duration-300 hover:bg-[#9c7905]">
-          Publica tu primera obra
-        </button>
+      <section
+        className="p-8 sm:p-16 text-center relative flex flex-col items-center justify-center min-h-[200px]"
+        style={{
+          backgroundImage: "url('/images/img/pinturaPasto.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
+        <div className="relative z-10 w-full">
+          <h2 className="text-3xl sm:text-4xl text-white mb-4 drop-shadow-lg">
+            Crea tu portafolio artístico
+          </h2>
+          <p className="text-xl sm:text-2xl text-white mb-6 drop-shadow-lg">
+            Muestra tus obras y conecta con otros artistas.
+          </p>
+          <button className="bg-[#d8c40c] text-white px-4 py-2 border-none rounded-2xl cursor-pointer font-semibold text-lg transition-colors duration-300 hover:bg-[#9c7905]">
+            Publica tu primera obra
+          </button>
+        </div>
       </section>
 
       <div className="w-full mx-auto my-12 max-w-6xl bg-gradient-to-br from-[#fffbe6] to-[#ffe082] rounded-[32px] shadow-lg shadow-gray-400/30 p-10 relative z-10">
