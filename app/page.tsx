@@ -38,8 +38,7 @@ export default function Page() {
       icon: <Star className="w-8 h-8" />,
       details: {
         terms: [
-          "Gana 1 punto por cada $1.000 COP gastados",
-          "100 puntos = $5.000 COP de descuento",
+          "Gana 1 weCOP de descuento",
           "Los puntos no expiran mientras tu cuenta esté activa",
           "Acumulación automática en cada compra"
         ],
