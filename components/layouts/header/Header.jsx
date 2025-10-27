@@ -9,7 +9,8 @@ import { FaUserAstronaut, FaSignOutAlt, FaBars, FaTimes } from "react-icons/fa";
 import { supabase } from "../../../supabase/client";
 import { useCart } from "../../features/CartContext";
 import AboutModal from '../../AboutModal';
-
+import { FaFire } from "react-icons/fa";
+import ReportModal from "../../features/ReportModal";
 // ----------------------------- COMPONENTES AUXILIARES -----------------------------
 function NavButton({ onClick, href, children }) {
   const baseClass =
@@ -167,7 +168,15 @@ export default function Header() {
         {/* Botones desktop */}
         <div className="hidden lg:flex items-center gap-5">
           {user ? (
-            <>
+            <div className="flex items-center gap-2">
+              <ReportModal />
+              {/* Badge gamer circular con neón */}
+           <div className="flex items-center gap-1">
+  <FaFire className="text-orange-400 text-xl drop-shadow-[0_0_8px_#ff6c00] animate-pulse" />
+  <span className="text-white font-bold text-sm">{user.puntos || 0}</span>
+</div>
+
+              {/* Icono astronauta */}
               <motion.div
                 className="text-2xl text-[#00ffff] drop-shadow-[0_0_10px_#00ffff]"
                 animate={{ scale: [1, 1.1, 1], rotate: [0, 5, -5, 0] }}
@@ -175,7 +184,10 @@ export default function Header() {
               >
                 <FaUserAstronaut />
               </motion.div>
+
+              {/* Nombre del usuario */}
               <span className="text-sm">{user.name}</span>
+
               <motion.button
                 onClick={handleLogout}
                 className="text-black text-sm font-bold px-3 py-2 rounded-md uppercase tracking-wide flex items-center gap-2"
@@ -184,7 +196,7 @@ export default function Header() {
               >
                 <FaSignOutAlt /> Cerrar sesión
               </motion.button>
-            </>
+            </div>
           ) : (
             <>
               <FaUserAstronaut className="text-2xl text-white opacity-80" />
