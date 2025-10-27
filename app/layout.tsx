@@ -5,7 +5,6 @@ import Providers from "./providers";
 import Footer from "../components/layouts/footer/Footer";
 import HeaderWrapper from "../components/layouts/header/HeaderWrapper";
 import ChatBotFlotante from "../components/ChatBotFlotante"; 
-
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
