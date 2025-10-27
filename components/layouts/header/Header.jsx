@@ -105,7 +105,7 @@ function GradientTitle({ children }) {
 export default function Header() {
   const [loginOpen, setLoginOpen] = useState(false);
   const [registerOpen, setRegisterOpen] = useState(false);
-  const [aboutOpen, setAboutOpen] = useState(false); // ✅ AGREGADO
+  const [aboutOpen, setAboutOpen] = useState(false);
   const [user, setUser] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const { clearCart } = useCart();
@@ -155,20 +155,13 @@ export default function Header() {
           <NavButton href="/">Inicio</NavButton>
           <NavButton href="/noticias">Noticias</NavButton>
           <DropdownMenu
-            title="Ingresar Como"
-            items={[
-              { href: "/empleado", label: "Como Empleado" },
-              { href: "/admin", label: "Como Administrador" },
-            ]}
-          />
-          <DropdownMenu
             title="Secciones"
             items={[
               { href: "/catalogo", label: "Catálogo de Juegos" },
               { href: "/recompensa", label: "Recompensas y Promociones" },
             ]}
           />
-          <NavButton onClick={() => setAboutOpen(true)}>Sobre Nosotros</NavButton> {/* ✅ MODIFICADO */}
+          <NavButton onClick={() => setAboutOpen(true)}>Sobre Nosotros</NavButton>
         </nav>
 
         {/* Botones desktop */}
@@ -227,7 +220,7 @@ export default function Header() {
             <NavButton href="/noticias">Noticias</NavButton>
             <NavButton href="/catalogo">Catálogo</NavButton>
             <NavButton href="/recompensa">Recompensas</NavButton>
-            <NavButton onClick={() => { setAboutOpen(true); setMenuOpen(false); }}>Sobre Nosotros</NavButton> {/* ✅ MODIFICADO */}
+            <NavButton onClick={() => { setAboutOpen(true); setMenuOpen(false); }}>Sobre Nosotros</NavButton>
 
             {user ? (
               <>
@@ -358,7 +351,7 @@ export default function Header() {
         </form>
       </Modal>
 
-      {/* ✅ MODAL SOBRE NOSOTROS AGREGADO */}
+      {/* MODAL SOBRE NOSOTROS */}
       <AboutModal 
         isOpen={aboutOpen} 
         onClose={() => setAboutOpen(false)} 
