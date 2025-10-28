@@ -5,12 +5,12 @@ import Link from "next/link";
 import { Input } from "@/components/ui/Input";
 import { motion } from "framer-motion";
 import { CartSheet } from "../../features/SheetDemo";
-import { FaUserAstronaut, FaSignOutAlt, FaBars, FaTimes } from "react-icons/fa";
+import { FaUserAstronaut, FaSignOutAlt, FaBars, FaTimes, FaFire } from "react-icons/fa";
 import { supabase } from "../../../supabase/client";
 import { useCart } from "../../../context/CartContext";
-import AboutModal from '../../features/AboutModal';
-import { FaFire } from "react-icons/fa";
+import AboutModal from "../../features/AboutModal";
 import ReportModal from "../../features/ReportModal";
+
 // ----------------------------- COMPONENTES AUXILIARES -----------------------------
 function NavButton({ onClick, href, children }) {
   const baseClass =
@@ -143,13 +143,21 @@ export default function Header() {
           </span>
         </Link>
 
-        {/* Menú hamburguesa (solo móvil) */}
-        <button
-          className="lg:hidden text-[#00ffff] text-2xl focus:outline-none"
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          {menuOpen ? <FaTimes /> : <FaBars />}
-        </button>
+        {/* 🔥 Puntos del usuario + Menú hamburguesa (solo móvil) */}
+        <div className="flex items-center gap-4 lg:hidden">
+          {user && (
+            <div className="flex items-center gap-1">
+              <FaFire className="text-orange-400 text-xl drop-shadow-[0_0_8px_#ff6c00] animate-pulse" />
+              <span className="text-white font-bold text-sm">{user.puntos || 0}</span>
+            </div>
+          )}
+          <button
+            className="text-[#00ffff] text-2xl focus:outline-none"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            {menuOpen ? <FaTimes /> : <FaBars />}
+          </button>
+        </div>
 
         {/* Navegación desktop */}
         <nav className="hidden lg:flex items-center gap-10 flex-1 justify-center text-sm">
@@ -157,10 +165,7 @@ export default function Header() {
           <NavButton href="/noticias">Noticias</NavButton>
           <DropdownMenu
             title="Secciones"
-            items={[
-              { href: "/catalogo", label: "Catálogo de Juegos" },
-              { href: "/recompensa", label: "Recompensas y Promociones" },
-            ]}
+            items={[{ href: "/recompensa", label: "Recompensas y Promociones" }]}
           />
           <NavButton onClick={() => setAboutOpen(true)}>Sobre Nosotros</NavButton>
         </nav>
@@ -170,13 +175,11 @@ export default function Header() {
           {user ? (
             <div className="flex items-center gap-2">
               <ReportModal />
-              {/* Badge gamer circular con neón */}
-           <div className="flex items-center gap-1">
-  <FaFire className="text-orange-400 text-xl drop-shadow-[0_0_8px_#ff6c00] animate-pulse" />
-  <span className="text-white font-bold text-sm">{user.puntos || 0}</span>
-</div>
-
-              {/* Icono astronauta */}
+              {/* 🔥 Puntos visibles en desktop */}
+              <div className="flex items-center gap-1">
+                <FaFire className="text-orange-400 text-xl drop-shadow-[0_0_8px_#ff6c00] animate-pulse" />
+                <span className="text-white font-bold text-sm">{user.puntos || 0}</span>
+              </div>
               <motion.div
                 className="text-2xl text-[#00ffff] drop-shadow-[0_0_10px_#00ffff]"
                 animate={{ scale: [1, 1.1, 1], rotate: [0, 5, -5, 0] }}
@@ -184,10 +187,7 @@ export default function Header() {
               >
                 <FaUserAstronaut />
               </motion.div>
-
-              {/* Nombre del usuario */}
               <span className="text-sm">{user.name}</span>
-
               <motion.button
                 onClick={handleLogout}
                 className="text-black text-sm font-bold px-3 py-2 rounded-md uppercase tracking-wide flex items-center gap-2"
@@ -230,13 +230,16 @@ export default function Header() {
           <div className="absolute top-full left-0 w-full bg-[#0a0a0a]/95 border-t border-[#00ffff30] flex flex-col items-center py-4 space-y-3 lg:hidden z-40">
             <NavButton href="/">Inicio</NavButton>
             <NavButton href="/noticias">Noticias</NavButton>
-            <NavButton href="/catalogo">Catálogo</NavButton>
             <NavButton href="/recompensa">Recompensas</NavButton>
             <NavButton onClick={() => { setAboutOpen(true); setMenuOpen(false); }}>Sobre Nosotros</NavButton>
 
             {user ? (
               <>
-                <span className="text-sm">{user.name}</span>
+                <ReportModal />
+                <div className="flex items-center gap-2 text-white">
+                  <FaUserAstronaut className="text-[#00ffff] text-xl drop-shadow-[0_0_8px_#00ffff]" />
+                  <span className="text-sm">{user.name}</span>
+                </div>
                 <button
                   onClick={handleLogout}
                   className="text-black text-sm font-bold px-3 py-2 rounded-md uppercase tracking-wide flex items-center gap-2"
@@ -269,6 +272,7 @@ export default function Header() {
                 </button>
               </>
             )}
+
             <CartSheet />
           </div>
         )}
@@ -363,11 +367,7 @@ export default function Header() {
         </form>
       </Modal>
 
-      {/* MODAL SOBRE NOSOTROS */}
-      <AboutModal 
-        isOpen={aboutOpen} 
-        onClose={() => setAboutOpen(false)} 
-      />
+      <AboutModal isOpen={aboutOpen} onClose={() => setAboutOpen(false)} />
     </>
   );
 }

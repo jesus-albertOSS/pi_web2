@@ -14,11 +14,12 @@ type Product = {
   image_url?: string;
   feature?: string;
   features?: string[];
+  tematica?: string; // ✅ agregado
 };
 
 export default function GamingCarousel() {
   const [emblaRef, emblaApi] = useEmblaCarousel({
-    loop: false, // 🚫 sin loop brusco
+    loop: false,
     align: "start",
   });
 
@@ -27,6 +28,7 @@ export default function GamingCarousel() {
   const [selectedFilter, setSelectedFilter] = useState("Todos");
   const { addToCart } = useCart();
 
+  // ✅ Lista de filtros por temáticas
   const filters = [
     "Todos",
     "Acción",
@@ -41,7 +43,7 @@ export default function GamingCarousel() {
     const fetchProducts = async () => {
       const { data, error } = await supabase
         .from("products")
-        .select("id, name, price, image_url, feature");
+        .select("id, name, price, image_url, feature, tematica"); // ✅ tematica incluida
 
       if (error) {
         console.error("Error al cargar productos:", error);
@@ -59,22 +61,21 @@ export default function GamingCarousel() {
     fetchProducts();
   }, []);
 
+  // ✅ Ahora filtramos por nombre o por tematica
   const filtered = products.filter((p) => {
     const matchesSearch = p.name.toLowerCase().includes(search.toLowerCase());
     const matchesFilter =
       selectedFilter === "Todos" ||
-      p.features?.includes(selectedFilter) ||
-      p.feature === selectedFilter;
+      p.tematica?.toLowerCase() === selectedFilter.toLowerCase(); // ✅ usa tematica
     return matchesSearch && matchesFilter;
   });
 
-  // 🕹️ Navegación suave sin loop feo
+  // Navegación
   const scrollPrev = useCallback(() => {
     if (!emblaApi) return;
     if (emblaApi.canScrollPrev()) {
       emblaApi.scrollPrev();
     } else {
-      // 🔁 Si está al inicio → ir al último
       emblaApi.scrollTo(filtered.length - 1);
     }
   }, [emblaApi, filtered.length]);
@@ -84,7 +85,6 @@ export default function GamingCarousel() {
     if (emblaApi.canScrollNext()) {
       emblaApi.scrollNext();
     } else {
-      // 🔁 Si está al final → volver al inicio
       emblaApi.scrollTo(0);
     }
   }, [emblaApi]);
@@ -123,7 +123,6 @@ export default function GamingCarousel() {
 
       {/* 🎮 Carrusel */}
       <div className="relative">
-        {/* Flechas laterales */}
         <button
           onClick={scrollPrev}
           className="absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-[#2a0057]/80 hover:bg-pink-700 text-white p-3 rounded-full shadow-md transition-all hover:scale-110 border border-pink-500"
