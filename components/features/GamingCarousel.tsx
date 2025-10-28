@@ -5,7 +5,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { motion } from "framer-motion";
 import { FaSearch, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { supabase } from "../../supabase/client";
-import { useCart } from "../../components/features/CartContext";
+import { useCart } from "../../context/CartContext";
 
 type Product = {
   id: string;

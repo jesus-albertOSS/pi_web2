@@ -7,8 +7,8 @@ import { motion } from "framer-motion";
 import { CartSheet } from "../../features/SheetDemo";
 import { FaUserAstronaut, FaSignOutAlt, FaBars, FaTimes } from "react-icons/fa";
 import { supabase } from "../../../supabase/client";
-import { useCart } from "../../features/CartContext";
-import AboutModal from '../../AboutModal';
+import { useCart } from "../../../context/CartContext";
+import AboutModal from '../../features/AboutModal';
 import { FaFire } from "react-icons/fa";
 import ReportModal from "../../features/ReportModal";
 // ----------------------------- COMPONENTES AUXILIARES -----------------------------

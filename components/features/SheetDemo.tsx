@@ -14,7 +14,7 @@ import {
 } from "../../components/ui/sheet";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { FaShoppingCart } from "react-icons/fa";
-import { useCart } from "../../components/features/CartContext";
+import { useCart } from "../../context/CartContext";
 import { supabase } from "../../supabase/client";
 
 export function CartSheet() {

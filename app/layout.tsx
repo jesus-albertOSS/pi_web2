@@ -4,7 +4,7 @@ import "./globals.css";
 import Providers from "./providers";
 import Footer from "../components/layouts/footer/Footer";
 import HeaderWrapper from "../components/layouts/header/HeaderWrapper";
-import ChatBotFlotante from "../components/ChatBotFlotante"; 
+import ChatBotFlotante from "../components/features/ChatBotFlotante"
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
