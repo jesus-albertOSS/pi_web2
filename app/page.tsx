@@ -2,13 +2,13 @@
 import BackgroundVideo from "@/components/features/BackgroundVideo";
 import FAQSection from "@/components/features/FAQSection";
 import Hero from "../components/ui/HeroParallaxDemo";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import GamingCarousel from "@/components/features/GamingCarousel";
 import { X, Gift, Star, Tag, Users } from "lucide-react";
 
 export default function Page() {
   const ref = useRef<HTMLDivElement | null>(null);
-  const [selectedReward, setSelectedReward] = useState(null);
+  const [selectedReward, setSelectedReward] = useState<any>(null);
 
   const rewards = [
     {
@@ -93,25 +93,35 @@ export default function Page() {
     }
   ];
 
+  // Bloquear scroll del body cuando el modal está abierto
+  useEffect(() => {
+    if (selectedReward) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+  }, [selectedReward]);
+
   return (
-    <main className="relative flex min-h-screen flex-col items-center justify-center bg-[#0a001a] text-white overflow-hidden">
-      {/* 🌌 Efecto de partículas o fondo animado */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(157,78,221,0.15),transparent_80%)] animate-pulse pointer-events-none"></div>
+    <main className="relative flex min-h-screen flex-col items-center justify-center bg-[#0a001a] text-white overflow-x-hidden">
+      
+      {/* 🌌 Fondo animado */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(157,78,221,0.15),transparent)] animate-pulse pointer-events-none" />
       <div className="absolute inset-0 bg-[url('/textures/noise.png')] opacity-10 pointer-events-none" />
 
-      {/* 🎬 HERO con video de fondo */}
+      {/* 🎬 HERO */}
       <div className="w-full border-b border-fuchsia-700/50 shadow-[0_0_40px_rgba(255,0,255,0.4)]">
         <BackgroundVideo src="/videos/89894-616430996.mp4" overlay={true}>
           <Hero />
         </BackgroundVideo>
       </div>
 
-      {/* ⚡ División neón entre secciones */}
-      <div className="w-full h-1 bg-gradient-to-r from-fuchsia-600 via-purple-400 to-fuchsia-600 animate-pulse shadow-[0_0_20px_rgba(255,0,255,0.8)]"></div>
+      {/* ⚡ División neón */}
+      <div className="w-full h-1 bg-gradient-to-r from-fuchsia-600 via-purple-400 to-fuchsia-600 animate-pulse shadow-[0_0_20px_rgba(255,0,255,0.8)]" />
 
-      {/* 🕹️ Carrusel de noticias destacadas */}
+      {/* 🕹️ Carrusel */}
       <section className="relative w-full py-12 bg-[#0a001a] flex flex-col items-center overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(91,0,211,0.15),transparent_70%)] animate-pulse" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(91,0,211,0.15),transparent)] animate-pulse" />
         <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-10 tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-400 drop-shadow-[0_0_10px_rgba(255,0,255,0.6)]">
           🚀 DESTACADOS DE LA SEMANA
         </h2>
@@ -121,60 +131,52 @@ export default function Page() {
       </section>
 
       {/* ⚡ División neón */}
-      <div className="w-full h-1 bg-gradient-to-r from-purple-600 via-fuchsia-400 to-purple-600 animate-pulse shadow-[0_0_20px_rgba(200,0,255,0.8)]"></div>
+      <div className="w-full h-1 bg-gradient-to-r from-purple-600 via-fuchsia-400 to-purple-600 animate-pulse shadow-[0_0_20px_rgba(200,0,255,0.8)]" />
 
-      {/* 💎 Recompensas y Promociones */}
-      <section className="w-full px-6 py-16 bg-[#0a001a] relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(255,0,255,0.1),transparent_70%)]" />
-        <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-12 tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-500 drop-shadow-[0_0_15px_rgba(255,0,255,0.7)]">
-          🎮 RECOMPENSAS Y PROMOCIONES
-        </h2>
+      {/* 💎 Recompensas */}
+<section className="w-full px-6 py-16 bg-[#0a001a] relative overflow-visible">
+  {/* Fondos decorativos, solo visuales */}
+  <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(255,0,255,0.1),transparent)] pointer-events-none" />
+  
+  <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-12 tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-500 drop-shadow-[0_0_15px_rgba(255,0,255,0.7)]">
+    🎮 RECOMPENSAS Y PROMOCIONES
+  </h2>
 
-        <div className="flex flex-wrap justify-center gap-10 relative z-10">
-          {rewards.map((reward, index) => (
-            <div
-              key={index}
-              className="bg-[#1a003a]/80 backdrop-blur-md border border-fuchsia-600/40 rounded-2xl p-6 w-[320px] sm:w-[350px] hover:scale-105 hover:shadow-[0_0_35px_#ff00ff] transition-all duration-300 hover:border-fuchsia-400 flex flex-col"
-            >
-              <div className="flex justify-center mb-4 text-fuchsia-400">
-                {reward.icon}
-              </div>
-              <h3 className="text-xl font-semibold text-fuchsia-400 mb-3 text-center min-h-[56px]">
-                {reward.title}
-              </h3>
-              <p className="text-gray-300 text-sm text-center flex-grow">
-                {reward.desc}
-              </p>
-              <div className="mt-5 flex justify-center">
-                <button 
-                  onClick={() => setSelectedReward(reward)}
-                  className="px-5 py-2 text-sm font-bold text-white rounded-full bg-gradient-to-r from-fuchsia-500 to-purple-700 hover:from-purple-600 hover:to-fuchsia-600 transition-all duration-300 shadow-[0_0_20px_rgba(255,0,255,0.5)] hover:shadow-[0_0_30px_rgba(255,0,255,0.8)]"
-                >
-                  Ver más
-                </button>
-              </div>
-            </div>
-          ))}
+  <div className="flex flex-wrap justify-center gap-10">
+    {rewards.map((reward, index) => (
+      <div
+        key={index}
+        className="bg-[#1a003a]/80 backdrop-blur-md border border-fuchsia-600/40 rounded-2xl p-6 w-[320px] sm:w-[350px] hover:scale-105 hover:shadow-[0_0_35px_#ff00ff] transition-all duration-300 hover:border-fuchsia-400 flex flex-col"
+      >
+        <div className="flex justify-center mb-4 text-fuchsia-400">
+          {reward.icon}
         </div>
-
-        {/* 🌈 Luces ambientales dinámicas */}
-        <div className="absolute -bottom-24 -right-20 w-[300px] h-[300px] bg-fuchsia-600/30 blur-[120px] rounded-full animate-pulse"></div>
-        <div className="absolute top-10 -left-20 w-[250px] h-[250px] bg-purple-700/30 blur-[100px] rounded-full animate-pulse"></div>
-      </section>
-
-      {/* Modal */}
+        <h3 className="text-xl font-semibold text-fuchsia-400 mb-3 text-center min-h-[56px]">
+          {reward.title}
+        </h3>
+        <p className="text-gray-300 text-sm text-center flex-grow">
+          {reward.desc}
+        </p>
+        <div className="mt-5 flex justify-center">
+          <button 
+            onClick={() => setSelectedReward(reward)}
+            className="px-5 py-2 text-sm font-bold text-white rounded-full bg-gradient-to-r from-fuchsia-500 to-purple-700 hover:from-purple-600 hover:to-fuchsia-600 transition-all duration-300 shadow-[0_0_20px_rgba(255,0,255,0.5)] hover:shadow-[0_0_30px_rgba(255,0,255,0.8)]"
+          >
+            Ver más
+          </button>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+      {/* Modal de Recompensas */}
       {selectedReward && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-[fadeIn_0.3s_ease-out]">
-          <div className="bg-[#1a003a] border-2 border-fuchsia-500/50 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-[0_0_50px_rgba(255,0,255,0.5)] animate-[slideUp_0.3s_ease-out]">
-            {/* Header */}
-            <div className="sticky top-0 bg-gradient-to-r from-fuchsia-600 to-purple-700 p-6 flex items-center justify-between rounded-t-3xl">
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm overflow-y-auto p-4">
+          <div className="bg-[#1a003a] border-2 border-fuchsia-500/50 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-[0_0_50px_rgba(255,0,255,0.5)] animate-fade-in">
+            <div className="sticky top-0 bg-gradient-to-r from-fuchsia-600 to-purple-700 p-6 flex items-center justify-between rounded-t-3xl z-50">
               <div className="flex items-center gap-4">
-                <div className="text-white">
-                  {selectedReward.icon}
-                </div>
-                <h3 className="text-2xl font-bold text-white">
-                  {selectedReward.title}
-                </h3>
+                <div className="text-white">{selectedReward.icon}</div>
+                <h3 className="text-2xl font-bold text-white">{selectedReward.title}</h3>
               </div>
               <button
                 onClick={() => setSelectedReward(null)}
@@ -184,22 +186,13 @@ export default function Page() {
               </button>
             </div>
 
-            {/* Content */}
             <div className="p-6 space-y-6">
-              {/* Descripción */}
-              <div>
-                <p className="text-gray-300 text-lg">
-                  {selectedReward.desc}
-                </p>
-              </div>
+              <p className="text-gray-300 text-lg">{selectedReward.desc}</p>
 
-              {/* Términos y Condiciones */}
               <div className="bg-[#0a001a]/50 rounded-xl p-5 border border-fuchsia-500/30">
-                <h4 className="text-fuchsia-400 font-bold text-lg mb-3 flex items-center gap-2">
-                  📋 Términos y Condiciones
-                </h4>
+                <h4 className="text-fuchsia-400 font-bold text-lg mb-3 flex items-center gap-2">📋 Términos y Condiciones</h4>
                 <ul className="space-y-2">
-                  {selectedReward.details.terms.map((term, idx) => (
+                  {selectedReward.details.terms.map((term: string, idx: number) => (
                     <li key={idx} className="text-gray-300 flex items-start gap-2">
                       <span className="text-fuchsia-400 mt-1">•</span>
                       <span>{term}</span>
@@ -208,34 +201,23 @@ export default function Page() {
                 </ul>
               </div>
 
-              {/* Cómo usar */}
               <div className="bg-[#0a001a]/50 rounded-xl p-5 border border-purple-500/30">
-                <h4 className="text-purple-400 font-bold text-lg mb-3 flex items-center gap-2">
-                  🎯 ¿Cómo usar esta promoción?
-                </h4>
+                <h4 className="text-purple-400 font-bold text-lg mb-3 flex items-center gap-2">🎯 ¿Cómo usar esta promoción?</h4>
                 <ol className="space-y-2">
-                  {selectedReward.details.howToUse.map((step, idx) => (
+                  {selectedReward.details.howToUse.map((step: string, idx: number) => (
                     <li key={idx} className="text-gray-300 flex items-start gap-3">
-                      <span className="text-purple-400 font-bold min-w-[24px]">
-                        {idx + 1}.
-                      </span>
+                      <span className="text-purple-400 font-bold min-w-[24px]">{idx + 1}.</span>
                       <span>{step}</span>
                     </li>
                   ))}
                 </ol>
               </div>
 
-              {/* Ejemplo */}
               <div className="bg-gradient-to-r from-fuchsia-900/30 to-purple-900/30 rounded-xl p-5 border border-fuchsia-400/40">
-                <h4 className="text-fuchsia-300 font-bold text-lg mb-2 flex items-center gap-2">
-                  💡 Ejemplo
-                </h4>
-                <p className="text-gray-200 italic">
-                  {selectedReward.details.example}
-                </p>
+                <h4 className="text-fuchsia-300 font-bold text-lg mb-2 flex items-center gap-2">💡 Ejemplo</h4>
+                <p className="text-gray-200 italic">{selectedReward.details.example}</p>
               </div>
 
-              {/* Botón de acción */}
               <div className="pt-4 flex justify-center">
                 <button className="px-8 py-3 text-lg font-bold text-white rounded-full bg-gradient-to-r from-fuchsia-500 to-purple-700 hover:from-purple-600 hover:to-fuchsia-600 transition-all duration-300 shadow-[0_0_25px_rgba(255,0,255,0.6)] hover:shadow-[0_0_35px_rgba(255,0,255,0.9)] hover:scale-105">
                   ¡Activar Promoción!
@@ -246,36 +228,11 @@ export default function Page() {
         </div>
       )}
 
-      {/* ⚡ División neón */}
-      <div className="w-full h-1 bg-gradient-to-r from-fuchsia-500 via-purple-400 to-fuchsia-500 animate-pulse shadow-[0_0_25px_rgba(255,0,255,0.7)]"></div>
-
-      {/* 💬 Preguntas Frecuentes */}
+      {/* FAQ */}
       <section className="relative w-full py-1 bg-[#0a001a]">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,0,255,0.15),transparent_80%)] animate-pulse" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,0,255,0.15),transparent)] animate-pulse" />
         <FAQSection />
       </section>
-
-      <style jsx>{`
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
-        }
-
-        @keyframes slideUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
     </main>
   );
 }
