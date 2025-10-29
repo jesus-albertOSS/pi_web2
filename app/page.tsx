@@ -50,7 +50,7 @@ export default function Page() {
       icon: <Star className="w-8 h-8" />,
       details: {
         terms: [
-          "Gana 1 weCOP de descuento",
+          "Gana 1 weCOP de descuento por cada punto",
           "Los puntos no expiran mientras tu cuenta esté activa",
           "Acumulación automática en cada compra",
         ],
@@ -114,24 +114,24 @@ export default function Page() {
   }, [selectedReward]);
 
   return (
-    <main className="relative flex min-h-screen flex-col items-center justify-center bg-[#0a001a] text-white overflow-x-hidden">
+    <main className="relative flex min-h-screen flex-col items-center justify-center bg-[#0a001a] text-white overflow-x-hidden z-0">
       {/* 🌌 Fondo animado */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(157,78,221,0.15),transparent)] animate-pulse pointer-events-none" />
       <div className="absolute inset-0 bg-[url('/textures/noise.png')] opacity-10 pointer-events-none" />
 
       {/* 🎬 HERO */}
-    <section className="relative w-full overflow-hidden">
-  <BackgroundVideo src="/videos/89894-616430996.mp4" overlay={true}>
-    <Hero />
-  </BackgroundVideo>
-  <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-fuchsia-600 via-purple-400 to-fuchsia-600 shadow-[0_0_20px_rgba(255,0,255,0.8)]"></div>
-</section>
+      <section className="relative w-full overflow-hidden z-0">
+        <BackgroundVideo src="/videos/89894-616430996.mp4" overlay={true}>
+          <Hero />
+        </BackgroundVideo>
+        <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-fuchsia-600 via-purple-400 to-fuchsia-600 shadow-[0_0_20px_rgba(255,0,255,0.8)]"></div>
+      </section>
 
       {/* ⚡ División neón */}
       <div className="w-full h-1 bg-gradient-to-r from-fuchsia-600 via-purple-400 to-fuchsia-600 animate-pulse shadow-[0_0_20px_rgba(255,0,255,0.8)]" />
 
       {/* 🕹️ Carrusel */}
-      <section className="relative w-full py-12 bg-[#0a001a] flex flex-col items-center overflow-hidden">
+      <section className="relative w-full py-12 bg-[#0a001a] flex flex-col items-center overflow-hidden z-0">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(91,0,211,0.15),transparent)] animate-pulse" />
         <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-10 tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-400 drop-shadow-[0_0_10px_rgba(255,0,255,0.6)]">
           🚀 DESTACADOS DE LA SEMANA
@@ -141,11 +141,8 @@ export default function Page() {
         </div>
       </section>
 
-      {/* ⚡ División neón */}
-      <div className="w-full h-1 bg-gradient-to-r from-purple-600 via-fuchsia-400 to-purple-600 animate-pulse shadow-[0_0_20px_rgba(200,0,255,0.8)]" />
-
       {/* 💎 Recompensas */}
-      <section className="w-full px-6 py-16 bg-[#0a001a] relative overflow-visible">
+      <section className="relative w-full px-6 py-16 bg-[#0a001a] overflow-visible z-0">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(255,0,255,0.1),transparent)] pointer-events-none" />
 
         <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-12 tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-500 drop-shadow-[0_0_15px_rgba(255,0,255,0.7)]">
@@ -180,11 +177,11 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Modal */}
+      {/* 🧱 Modal (solo para esta página, sin interferir con otros) */}
       {selectedReward && (
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm overflow-y-auto p-4">
-          <div className="bg-[#1a003a] border-2 border-fuchsia-500/50 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-[0_0_50px_rgba(255,0,255,0.5)] animate-fade-in">
-            <div className="sticky top-0 bg-gradient-to-r from-fuchsia-600 to-purple-700 p-6 flex items-center justify-between rounded-t-3xl z-50">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm overflow-y-auto p-4">
+          <div className="bg-[#1a003a] border-2 border-fuchsia-500/50 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-[0_0_50px_rgba(255,0,255,0.5)]">
+            <div className="sticky top-0 bg-gradient-to-r from-fuchsia-600 to-purple-700 p-6 flex items-center justify-between rounded-t-3xl z-10">
               <div className="flex items-center gap-4">
                 <div className="text-white">{selectedReward.icon}</div>
                 <h3 className="text-2xl font-bold text-white">
@@ -203,7 +200,7 @@ export default function Page() {
               <p className="text-gray-300 text-lg">{selectedReward.desc}</p>
 
               <div className="bg-[#0a001a]/50 rounded-xl p-5 border border-fuchsia-500/30">
-                <h4 className="text-fuchsia-400 font-bold text-lg mb-3 flex items-center gap-2">
+                <h4 className="text-fuchsia-400 font-bold text-lg mb-3">
                   📋 Términos y Condiciones
                 </h4>
                 <ul className="space-y-2">
@@ -217,7 +214,7 @@ export default function Page() {
               </div>
 
               <div className="bg-[#0a001a]/50 rounded-xl p-5 border border-purple-500/30">
-                <h4 className="text-purple-400 font-bold text-lg mb-3 flex items-center gap-2">
+                <h4 className="text-purple-400 font-bold text-lg mb-3">
                   🎯 ¿Cómo usar esta promoción?
                 </h4>
                 <ol className="space-y-2">
@@ -233,7 +230,7 @@ export default function Page() {
               </div>
 
               <div className="bg-gradient-to-r from-fuchsia-900/30 to-purple-900/30 rounded-xl p-5 border border-fuchsia-400/40">
-                <h4 className="text-fuchsia-300 font-bold text-lg mb-2 flex items-center gap-2">
+                <h4 className="text-fuchsia-300 font-bold text-lg mb-2">
                   💡 Ejemplo
                 </h4>
                 <p className="text-gray-200 italic">
@@ -252,7 +249,7 @@ export default function Page() {
       )}
 
       {/* FAQ */}
-      <section className="relative w-full py-1 bg-[#0a001a]">
+      <section className="relative w-full py-1 bg-[#0a001a] z-0">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,0,255,0.15),transparent)] animate-pulse" />
         <FAQSection />
       </section>
