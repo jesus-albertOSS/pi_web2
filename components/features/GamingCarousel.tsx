@@ -80,19 +80,6 @@ export default function GamingCarousel() {
     setTimeout(() => setShowNotification(false), 1500);
   };
 
-  // 🔹 Bloquear scroll del body cuando el modal esté abierto
-  useEffect(() => {
-    if (selectedProduct) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [selectedProduct]);
-
   return (
     <div className="relative w-full bg-gradient-to-b from-[#1e003e] to-[#3b007a] text-white px-6 py-10 rounded-3xl shadow-lg overflow-hidden">
       {/* 🔍 Buscador y filtros */}
@@ -197,27 +184,26 @@ export default function GamingCarousel() {
         </div>
       </div>
 
-    {/* ⚡ Notificación responsive y más pequeña */}
-<AnimatePresence>
-  {showNotification && (
-    <motion.div
-      initial={{ opacity: 0, y: -30, scale: 0.8 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, y: -30, scale: 0.8 }}
-      transition={{ duration: 0.3 }}
-      className="fixed top-4 left-1/2 -translate-x-1/2 z-[9999] 
-                 bg-gradient-to-r from-cyan-600 via-blue-700 to-purple-700
-                 px-6 py-2 rounded-xl text-white text-sm sm:text-base font-semibold
-                 shadow-lg border border-cyan-400/30
-                 flex items-center justify-center space-x-2 sm:space-x-3"
-    >
-      <span>⚡ Producto añadido ⚡</span>
-    </motion.div>
-  )}
-</AnimatePresence>
+      {/* ⚡ Notificación */}
+      <AnimatePresence>
+        {showNotification && (
+          <motion.div
+            initial={{ opacity: 0, y: -30, scale: 0.8 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -30, scale: 0.8 }}
+            transition={{ duration: 0.3 }}
+            className="fixed top-4 left-1/2 -translate-x-1/2 z-[9999] 
+                     bg-gradient-to-r from-cyan-600 via-blue-700 to-purple-700
+                     px-6 py-2 rounded-xl text-white text-sm sm:text-base font-semibold
+                     shadow-lg border border-cyan-400/30
+                     flex items-center justify-center space-x-2 sm:space-x-3"
+          >
+            <span>⚡ Producto añadido ⚡</span>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-
-      {/* 💫 Modal responsivo y scroll bloqueado */}
+      {/* 💫 Modal */}
       <AnimatePresence>
         {selectedProduct && (
           <motion.div
