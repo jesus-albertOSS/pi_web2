@@ -2,16 +2,17 @@
 
 import React, { useEffect, useRef, ReactNode } from "react";
 
-type BackgroundVideoProps = {
+interface BackgroundVideoProps {
   src: string;
   overlay?: boolean;
-  children: ReactNode;
-};
+  children?: ReactNode; // children opcional
+}
 
-const BackgroundVideo: React.FC<BackgroundVideoProps> = ({ src, overlay = true, children }) => {
+export default function BackgroundVideo({ src, overlay = true, children }: BackgroundVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const isMobile = typeof navigator !== "undefined" && /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  const isMobile =
+    typeof navigator !== "undefined" && /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
   useEffect(() => {
     if (isMobile) return;
@@ -61,6 +62,4 @@ const BackgroundVideo: React.FC<BackgroundVideoProps> = ({ src, overlay = true, 
       <div className="relative z-10">{children}</div>
     </div>
   );
-};
-
-export default BackgroundVideo;
+}
