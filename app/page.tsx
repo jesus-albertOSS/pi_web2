@@ -120,11 +120,12 @@ export default function Page() {
       <div className="absolute inset-0 bg-[url('/textures/noise.png')] opacity-10 pointer-events-none" />
 
       {/* 🎬 HERO */}
-      <div className="w-full border-b border-fuchsia-700/50 shadow-[0_0_40px_rgba(255,0,255,0.4)]">
-        <BackgroundVideo src="/videos/89894-616430996.mp4" overlay={true}>
-          <Hero />
-        </BackgroundVideo>
-      </div>
+    <section className="relative w-full overflow-hidden">
+  <BackgroundVideo src="/videos/89894-616430996.mp4" overlay={true}>
+    <Hero />
+  </BackgroundVideo>
+  <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-fuchsia-600 via-purple-400 to-fuchsia-600 shadow-[0_0_20px_rgba(255,0,255,0.8)]"></div>
+</section>
 
       {/* ⚡ División neón */}
       <div className="w-full h-1 bg-gradient-to-r from-fuchsia-600 via-purple-400 to-fuchsia-600 animate-pulse shadow-[0_0_20px_rgba(255,0,255,0.8)]" />
