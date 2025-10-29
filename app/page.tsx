@@ -6,6 +6,7 @@ import Hero from "../components/ui/HeroParallaxDemo";
 import React, { useState, useEffect } from "react";
 import GamingCarousel from "@/components/features/GamingCarousel";
 import { X, Gift, Star, Tag, Users } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 type RewardDetails = {
   terms: string[];
@@ -115,7 +116,7 @@ export default function Page() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-[#0a001a] text-white overflow-x-hidden">
-      {/* Fondo animado */}
+      {/* Fondos animados */}
       <div className="bg-[radial-gradient(circle_at_50%_20%,rgba(157,78,221,0.15),transparent)] animate-pulse w-full h-full pointer-events-none" />
       <div className="bg-[url('/textures/noise.png')] opacity-10 w-full h-full pointer-events-none" />
 
@@ -171,68 +172,84 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Modal */}
-      {selectedReward && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black/80 backdrop-blur-sm overflow-y-auto p-4">
-          <div className="bg-[#1a003a] border-2 border-fuchsia-500/50 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-[0_0_50px_rgba(255,0,255,0.5)] animate-fade-in">
-            <div className="sticky top-0 bg-gradient-to-r from-fuchsia-600 to-purple-700 p-6 flex items-center justify-between rounded-t-3xl">
-              <div className="flex items-center gap-4">
-                <div className="text-white">{selectedReward.icon}</div>
-                <h3 className="text-2xl font-bold text-white">{selectedReward.title}</h3>
-              </div>
-              <button
-                onClick={() => setSelectedReward(null)}
-                className="text-white hover:bg-white/20 rounded-full p-2 transition-all duration-300"
-              >
-                <X className="w-6 h-6" />
-              </button>
-            </div>
-
-            <div className="p-6 space-y-6">
-              <p className="text-gray-300 text-lg">{selectedReward.desc}</p>
-
-              <div className="bg-[#0a001a]/50 rounded-xl p-5 border border-fuchsia-500/30">
-                <h4 className="text-fuchsia-400 font-bold text-lg mb-3 flex items-center gap-2">
-                  📋 Términos y Condiciones
-                </h4>
-                <ul className="space-y-2">
-                  {selectedReward.details.terms.map((term, idx) => (
-                    <li key={idx} className="text-gray-300 flex items-start gap-2">
-                      <span className="text-fuchsia-400 mt-1">•</span>
-                      <span>{term}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="bg-[#0a001a]/50 rounded-xl p-5 border border-purple-500/30">
-                <h4 className="text-purple-400 font-bold text-lg mb-3 flex items-center gap-2">
-                  🎯 ¿Cómo usar esta promoción?
-                </h4>
-                <ol className="space-y-2">
-                  {selectedReward.details.howToUse.map((step, idx) => (
-                    <li key={idx} className="text-gray-300 flex items-start gap-3">
-                      <span className="text-purple-400 font-bold min-w-[24px]">{idx + 1}.</span>
-                      <span>{step}</span>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-
-              <div className="bg-gradient-to-r from-fuchsia-900/30 to-purple-900/30 rounded-xl p-5 border border-fuchsia-400/40">
-                <h4 className="text-fuchsia-300 font-bold text-lg mb-2 flex items-center gap-2">💡 Ejemplo</h4>
-                <p className="text-gray-200 italic">{selectedReward.details.example}</p>
-              </div>
-
-              <div className="pt-4 flex justify-center">
-                <button className="px-8 py-3 text-lg font-bold text-white rounded-full bg-gradient-to-r from-fuchsia-500 to-purple-700 hover:from-purple-600 hover:to-fuchsia-600 transition-all duration-300 shadow-[0_0_25px_rgba(255,0,255,0.6)] hover:shadow-[0_0_35px_rgba(255,0,255,0.9)] hover:scale-105">
-                  ¡Activar Promoción!
+      {/* Modal estilo gaming */}
+      <AnimatePresence>
+        {selectedReward && (
+          <motion.div
+            key="reward-modal"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md overflow-y-auto p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className="bg-[#1a003a] border-2 border-fuchsia-500/50 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-[0_0_50px_rgba(255,0,255,0.5)]"
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ duration: 0.25 }}
+            >
+              {/* Header */}
+              <div className="sticky top-0 bg-gradient-to-r from-fuchsia-600 to-purple-700 p-6 flex items-center justify-between rounded-t-3xl">
+                <div className="flex items-center gap-4">
+                  <div className="text-white">{selectedReward.icon}</div>
+                  <h3 className="text-2xl font-bold text-white">{selectedReward.title}</h3>
+                </div>
+                <button
+                  onClick={() => setSelectedReward(null)}
+                  className="text-white hover:bg-white/20 rounded-full p-2 transition-all duration-300"
+                >
+                  <X className="w-6 h-6" />
                 </button>
               </div>
-            </div>
-          </div>
-        </div>
-      )}
+
+              {/* Contenido */}
+              <div className="p-6 space-y-6">
+                <p className="text-gray-300 text-lg">{selectedReward.desc}</p>
+
+                <div className="bg-[#0a001a]/50 rounded-xl p-5 border border-fuchsia-500/30">
+                  <h4 className="text-fuchsia-400 font-bold text-lg mb-3 flex items-center gap-2">
+                    📋 Términos y Condiciones
+                  </h4>
+                  <ul className="space-y-2">
+                    {selectedReward.details.terms.map((term, idx) => (
+                      <li key={idx} className="text-gray-300 flex items-start gap-2">
+                        <span className="text-fuchsia-400 mt-1">•</span>
+                        <span>{term}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="bg-[#0a001a]/50 rounded-xl p-5 border border-purple-500/30">
+                  <h4 className="text-purple-400 font-bold text-lg mb-3 flex items-center gap-2">
+                    🎯 ¿Cómo usar esta promoción?
+                  </h4>
+                  <ol className="space-y-2">
+                    {selectedReward.details.howToUse.map((step, idx) => (
+                      <li key={idx} className="text-gray-300 flex items-start gap-3">
+                        <span className="text-purple-400 font-bold min-w-[24px]">{idx + 1}.</span>
+                        <span>{step}</span>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+
+                <div className="bg-gradient-to-r from-fuchsia-900/30 to-purple-900/30 rounded-xl p-5 border border-fuchsia-400/40">
+                  <h4 className="text-fuchsia-300 font-bold text-lg mb-2 flex items-center gap-2">💡 Ejemplo</h4>
+                  <p className="text-gray-200 italic">{selectedReward.details.example}</p>
+                </div>
+
+                <div className="pt-4 flex justify-center">
+                  <button className="px-8 py-3 text-lg font-bold text-white rounded-full bg-gradient-to-r from-fuchsia-500 to-purple-700 hover:from-purple-600 hover:to-fuchsia-600 transition-all duration-300 shadow-[0_0_25px_rgba(255,0,255,0.6)] hover:shadow-[0_0_35px_rgba(255,0,255,0.9)] hover:scale-105">
+                    ¡Activar Promoción!
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* FAQ */}
       <section className="w-full py-1 bg-[#0a001a]">
