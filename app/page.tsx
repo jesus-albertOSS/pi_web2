@@ -114,40 +114,37 @@ export default function Page() {
   }, [selectedReward]);
 
   return (
-    <main className="relative flex min-h-screen flex-col items-center justify-center bg-[#0a001a] text-white overflow-x-hidden">
-      {/* 🌌 Fondo animado */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(157,78,221,0.15),transparent)] animate-pulse pointer-events-none" />
-      <div className="absolute inset-0 bg-[url('/textures/noise.png')] opacity-10 pointer-events-none" />
+    <main className="flex min-h-screen flex-col items-center justify-center bg-[#0a001a] text-white overflow-x-hidden">
+      {/* Fondo animado */}
+      <div className="bg-[radial-gradient(circle_at_50%_20%,rgba(157,78,221,0.15),transparent)] animate-pulse w-full h-full pointer-events-none" />
+      <div className="bg-[url('/textures/noise.png')] opacity-10 w-full h-full pointer-events-none" />
 
-      {/* 🎬 HERO */}
-    <section className="relative w-full overflow-hidden">
-  <BackgroundVideo src="/videos/89894-616430996.mp4" overlay={true}>
-    <Hero />
-  </BackgroundVideo>
-  <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-fuchsia-600 via-purple-400 to-fuchsia-600 shadow-[0_0_20px_rgba(255,0,255,0.8)]"></div>
-</section>
+      {/* HERO */}
+      <section className="w-full overflow-hidden">
+        <BackgroundVideo src="/videos/89894-616430996.mp4" overlay={true}>
+          <Hero />
+        </BackgroundVideo>
+        <div className="w-full h-1 bg-gradient-to-r from-fuchsia-600 via-purple-400 to-fuchsia-600 shadow-[0_0_20px_rgba(255,0,255,0.8)]" />
+      </section>
 
-      {/* ⚡ División neón */}
+      {/* División neón */}
       <div className="w-full h-1 bg-gradient-to-r from-fuchsia-600 via-purple-400 to-fuchsia-600 animate-pulse shadow-[0_0_20px_rgba(255,0,255,0.8)]" />
 
-      {/* 🕹️ Carrusel */}
-      <section className="relative w-full py-12 bg-[#0a001a] flex flex-col items-center overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(91,0,211,0.15),transparent)] animate-pulse" />
+      {/* Carrusel */}
+      <section className="w-full py-12 bg-[#0a001a] flex flex-col items-center overflow-hidden">
         <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-10 tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-400 drop-shadow-[0_0_10px_rgba(255,0,255,0.6)]">
           🚀 DESTACADOS DE LA SEMANA
         </h2>
-        <div className="max-w-[95%] mx-auto z-10">
+        <div className="max-w-[95%] mx-auto">
           <GamingCarousel />
         </div>
       </section>
 
-      {/* ⚡ División neón */}
+      {/* División neón */}
       <div className="w-full h-1 bg-gradient-to-r from-purple-600 via-fuchsia-400 to-purple-600 animate-pulse shadow-[0_0_20px_rgba(200,0,255,0.8)]" />
 
-      {/* 💎 Recompensas */}
-      <section className="w-full px-6 py-16 bg-[#0a001a] relative overflow-visible">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(255,0,255,0.1),transparent)] pointer-events-none" />
-
+      {/* Recompensas */}
+      <section className="w-full px-6 py-16 bg-[#0a001a]">
         <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-12 tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-500 drop-shadow-[0_0_15px_rgba(255,0,255,0.7)]">
           🎮 RECOMPENSAS Y PROMOCIONES
         </h2>
@@ -158,15 +155,9 @@ export default function Page() {
               key={index}
               className="bg-[#1a003a]/80 backdrop-blur-md border border-fuchsia-600/40 rounded-2xl p-6 w-[320px] sm:w-[350px] hover:scale-105 hover:shadow-[0_0_35px_#ff00ff] transition-all duration-300 hover:border-fuchsia-400 flex flex-col"
             >
-              <div className="flex justify-center mb-4 text-fuchsia-400">
-                {reward.icon}
-              </div>
-              <h3 className="text-xl font-semibold text-fuchsia-400 mb-3 text-center min-h-[56px]">
-                {reward.title}
-              </h3>
-              <p className="text-gray-300 text-sm text-center flex-grow">
-                {reward.desc}
-              </p>
+              <div className="flex justify-center mb-4 text-fuchsia-400">{reward.icon}</div>
+              <h3 className="text-xl font-semibold text-fuchsia-400 mb-3 text-center min-h-[56px]">{reward.title}</h3>
+              <p className="text-gray-300 text-sm text-center flex-grow">{reward.desc}</p>
               <div className="mt-5 flex justify-center">
                 <button
                   onClick={() => setSelectedReward(reward)}
@@ -182,14 +173,12 @@ export default function Page() {
 
       {/* Modal */}
       {selectedReward && (
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm overflow-y-auto p-4">
+        <div className="fixed inset-0 flex items-center justify-center bg-black/80 backdrop-blur-sm overflow-y-auto p-4">
           <div className="bg-[#1a003a] border-2 border-fuchsia-500/50 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-[0_0_50px_rgba(255,0,255,0.5)] animate-fade-in">
-            <div className="sticky top-0 bg-gradient-to-r from-fuchsia-600 to-purple-700 p-6 flex items-center justify-between rounded-t-3xl z-50">
+            <div className="sticky top-0 bg-gradient-to-r from-fuchsia-600 to-purple-700 p-6 flex items-center justify-between rounded-t-3xl">
               <div className="flex items-center gap-4">
                 <div className="text-white">{selectedReward.icon}</div>
-                <h3 className="text-2xl font-bold text-white">
-                  {selectedReward.title}
-                </h3>
+                <h3 className="text-2xl font-bold text-white">{selectedReward.title}</h3>
               </div>
               <button
                 onClick={() => setSelectedReward(null)}
@@ -223,9 +212,7 @@ export default function Page() {
                 <ol className="space-y-2">
                   {selectedReward.details.howToUse.map((step, idx) => (
                     <li key={idx} className="text-gray-300 flex items-start gap-3">
-                      <span className="text-purple-400 font-bold min-w-[24px]">
-                        {idx + 1}.
-                      </span>
+                      <span className="text-purple-400 font-bold min-w-[24px]">{idx + 1}.</span>
                       <span>{step}</span>
                     </li>
                   ))}
@@ -233,12 +220,8 @@ export default function Page() {
               </div>
 
               <div className="bg-gradient-to-r from-fuchsia-900/30 to-purple-900/30 rounded-xl p-5 border border-fuchsia-400/40">
-                <h4 className="text-fuchsia-300 font-bold text-lg mb-2 flex items-center gap-2">
-                  💡 Ejemplo
-                </h4>
-                <p className="text-gray-200 italic">
-                  {selectedReward.details.example}
-                </p>
+                <h4 className="text-fuchsia-300 font-bold text-lg mb-2 flex items-center gap-2">💡 Ejemplo</h4>
+                <p className="text-gray-200 italic">{selectedReward.details.example}</p>
               </div>
 
               <div className="pt-4 flex justify-center">
@@ -252,8 +235,7 @@ export default function Page() {
       )}
 
       {/* FAQ */}
-      <section className="relative w-full py-1 bg-[#0a001a]">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,0,255,0.15),transparent)] animate-pulse" />
+      <section className="w-full py-1 bg-[#0a001a]">
         <FAQSection />
       </section>
     </main>

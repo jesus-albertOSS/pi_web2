@@ -220,7 +220,7 @@ export default function GamingCarousel() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
-              className="relative w-full max-w-4xl rounded-3xl overflow-hidden shadow-[0_0_40px_#00eaff80] 
+              className="relative w-full max-w-[95%] sm:max-w-3xl md:max-w-4xl rounded-3xl overflow-hidden shadow-[0_0_40px_#00eaff80] 
                          border border-cyan-500/40 bg-[#000000cc] max-h-[90vh] overflow-y-auto 
                          scrollbar-thin scrollbar-thumb-cyan-600 scrollbar-track-transparent"
               onClick={(e) => e.stopPropagation()}
@@ -243,7 +243,7 @@ export default function GamingCarousel() {
                   transition={{ duration: 0.4 }}
                   className="flex justify-center"
                 >
-                  <div className="relative w-full max-w-[320px] sm:max-w-[360px]">
+                  <div className="relative w-full max-w-[280px] sm:max-w-[320px]">
                     <img
                       src={selectedProduct.image_url}
                       alt={selectedProduct.name}
@@ -260,20 +260,20 @@ export default function GamingCarousel() {
                   className="flex flex-col text-center md:text-left space-y-4"
                 >
                   <motion.h2
-                    className="text-3xl sm:text-4xl font-extrabold text-cyan-400 drop-shadow-[0_0_15px_#00eaff]"
+                    className="text-2xl sm:text-3xl font-extrabold text-cyan-400 drop-shadow-[0_0_15px_#00eaff]"
                     animate={{ opacity: [1, 0.6, 1] }}
                     transition={{ repeat: Infinity, duration: 1.5 }}
                   >
                     ✨ GAMING ✨
                   </motion.h2>
 
-                  <h3 className="text-2xl sm:text-3xl font-bold text-white">{selectedProduct.name}</h3>
+                  <h3 className="text-xl sm:text-2xl font-bold text-white">{selectedProduct.name}</h3>
 
                   <p className="text-base sm:text-lg text-cyan-300 font-semibold tracking-wide">
                     Precio: <span className="text-white">${selectedProduct.price.toFixed(2)}</span>
                   </p>
 
-                  <div className="h-[2px] w-24 bg-gradient-to-r from-cyan-500 to-blue-400 mx-auto md:mx-0 rounded-full"></div>
+                  <div className="h-[2px] w-20 sm:w-24 bg-gradient-to-r from-cyan-500 to-blue-400 mx-auto md:mx-0 rounded-full"></div>
 
                   <p className="text-gray-300 text-sm sm:text-base leading-relaxed italic">
                     {selectedProduct.description || "Sin descripción disponible."}
