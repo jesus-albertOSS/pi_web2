@@ -120,12 +120,12 @@ export default function Page() {
       <div className="absolute inset-0 bg-[url('/textures/noise.png')] opacity-10 pointer-events-none" />
 
       {/* 🎬 HERO */}
-      <section className="relative w-full overflow-hidden">
-        <BackgroundVideo src="/videos/89894-616430996.mp4" overlay={true}>
-          <Hero />
-        </BackgroundVideo>
-        <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-fuchsia-600 via-purple-400 to-fuchsia-600 shadow-[0_0_20px_rgba(255,0,255,0.8)]"></div>
-      </section>
+    <section className="relative w-full overflow-hidden">
+  <BackgroundVideo src="/videos/89894-616430996.mp4" overlay={true}>
+    <Hero />
+  </BackgroundVideo>
+  <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-fuchsia-600 via-purple-400 to-fuchsia-600 shadow-[0_0_20px_rgba(255,0,255,0.8)]"></div>
+</section>
 
       {/* ⚡ División neón */}
       <div className="w-full h-1 bg-gradient-to-r from-fuchsia-600 via-purple-400 to-fuchsia-600 animate-pulse shadow-[0_0_20px_rgba(255,0,255,0.8)]" />
@@ -145,7 +145,7 @@ export default function Page() {
       <div className="w-full h-1 bg-gradient-to-r from-purple-600 via-fuchsia-400 to-purple-600 animate-pulse shadow-[0_0_20px_rgba(200,0,255,0.8)]" />
 
       {/* 💎 Recompensas */}
-      <section className="w-full px-6 py-16 bg-[#0a001a] relative overflow-visible z-0">
+      <section className="w-full px-6 py-16 bg-[#0a001a] relative overflow-visible">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(255,0,255,0.1),transparent)] pointer-events-none" />
 
         <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-12 tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-500 drop-shadow-[0_0_15px_rgba(255,0,255,0.7)]">
