@@ -18,12 +18,12 @@ export default function BackgroundVideo({ src, overlay = true, children }: Backg
         muted
         playsInline
         preload="auto"
+        controls={false}
       >
         <source src={src} type="video/mp4" />
       </video>
 
       {overlay && <div className="absolute inset-0 bg-black/40 pointer-events-none" />}
-
       <div className="relative z-10">{children}</div>
     </div>
   );
