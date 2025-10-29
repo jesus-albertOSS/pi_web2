@@ -5,10 +5,11 @@ export default function BackgroundVideo({ src, overlay = true, children }) {
       {/* Video de fondo */}
       <video
         className="absolute top-0 left-0 w-full h-full object-cover"
+        muted
         autoPlay
         loop
-        muted
         playsInline
+        preload="auto"
       >
         <source src={src} type="video/mp4" />
         Tu navegador no soporta video.
